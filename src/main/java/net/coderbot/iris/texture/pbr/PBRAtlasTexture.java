@@ -44,8 +44,9 @@ public class PBRAtlasTexture extends AbstractTexture {
 
 	public void addSprite(TextureAtlasSprite sprite) {
 		sprites.put(sprite.contents().name(), sprite);
-		if (sprite.createTicker() != null) {
-			animationTickers.put(sprite, (SpriteContents.Ticker) sprite.contents().createTicker());
+		SpriteContents.Ticker ticker = (SpriteContents.Ticker) sprite.contents().createTicker();
+		if (ticker != null) {
+			animationTickers.put(sprite, ticker);
 		}
 	}
 
@@ -104,10 +105,10 @@ public class PBRAtlasTexture extends AbstractTexture {
 
 	protected void uploadSprite(TextureAtlasSprite sprite) {
 		SpriteContents.AnimatedTexture ticker = ((SpriteContentsAccessor) sprite.contents()).getAnimatedTexture();
-		if (ticker instanceof AnimatedTextureAccessor && animationTickers.containsKey(sprite)) {
+		if (ticker instanceof AnimatedTextureAccessor) {
 			AnimatedTextureAccessor accessor = (AnimatedTextureAccessor) ticker;
 
-			accessor.invokeUploadFrame(((FrameInfoAccessor) accessor.getFrames().get(getFrameFromSprite(sprite))).getIndex(), sprite.getX(), sprite.getY());
+			accessor.invokeUploadFrame(sprite.getX(), sprite.getY(), ((FrameInfoAccessor) accessor.getFrames().get(getFrameFromSprite(sprite))).getIndex());
 			return;
 		}
 

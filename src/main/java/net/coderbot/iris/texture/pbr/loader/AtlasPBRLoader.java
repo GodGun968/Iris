@@ -58,6 +58,7 @@ public class AtlasPBRLoader implements PBRTextureLoader<TextureAtlas> {
 		int mipLevel = fetchAtlasMipLevel(atlas);
 
 		for (TextureAtlasSprite sprite : ((TextureAtlasAccessor) atlas).getTexturesByName().values()) {
+			Iris.logger.warn(sprite.contents().name().toString());
 			if (true) {
 				TextureAtlasSprite normalSprite = createPBRSprite(sprite, resourceManager, atlas, atlasWidth, atlasHeight, mipLevel, PBRType.NORMAL);
 				TextureAtlasSprite specularSprite = createPBRSprite(sprite, resourceManager, atlas, atlasWidth, atlasHeight, mipLevel, PBRType.SPECULAR);
@@ -102,6 +103,7 @@ public class AtlasPBRLoader implements PBRTextureLoader<TextureAtlas> {
 		ResourceLocation pbrImageLocation = pbrType.appendToFileLocation(spriteName);
 
 		TextureAtlasSprite pbrSprite = null;
+		Iris.logger.warn(pbrImageLocation.toString());
 		Optional<Resource> resource = resourceManager.getResource(pbrImageLocation);
 		if (resource.isPresent()) {
 			try (InputStream stream = resource.get().open()) {

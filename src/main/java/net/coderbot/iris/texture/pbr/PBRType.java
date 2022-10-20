@@ -31,9 +31,9 @@ public enum PBRType {
 		String newPath;
 		int extensionIndex = FilenameUtils.indexOfExtension(path);
 		if (extensionIndex != -1) {
-			newPath = path.substring(0, extensionIndex) + suffix + path.substring(extensionIndex);
+			newPath = "textures/" + path.substring(0, extensionIndex) + suffix + path.substring(extensionIndex) + ".png";
 		} else {
-			newPath = path + suffix;
+			newPath = "textures/" + path + suffix + ".png";
 		}
 		return new ResourceLocation(location.getNamespace(), newPath);
 	}

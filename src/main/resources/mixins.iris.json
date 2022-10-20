@@ -79,6 +79,7 @@
     "texture.MixinGlStateManager",
     "texture.MixinResourceLocation",
     "texture.MixinTextureAtlasSprite",
+    "texture.MixinTextureAtlas",
     "texture.SpriteContentsAccessor",
     "texture.StitcherHolderAccessor",
     "texture.MixinTextureManager",
